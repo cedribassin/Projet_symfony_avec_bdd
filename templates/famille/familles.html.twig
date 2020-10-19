@@ -20,6 +20,11 @@
                             <!--On affiche la page animal en récupérant l'animal via l'id au niveau du controller-->
                             <h2><a href="{{ path('afficher_animal',{'id': animal.id}) }}">{{animal.nom}}</a></h2>
                             <div>{{animal.description}}</div>
+                            <div>
+                                {% for continent in animal.continents %}
+                                    <a href="{{ path('afficher_continent',{'id': continent.id}) }}" class="btn btn-warning m-2">{{continent.libelle}} </a>
+                                {% endfor %}
+                            </div>    
                         </div>
                     </div>
                 </div>

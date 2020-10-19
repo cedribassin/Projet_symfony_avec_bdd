@@ -4,6 +4,7 @@ namespace App\DataFixtures;
 
 use App\Entity\Animal;
 use App\Entity\Famille;
+use App\Entity\Continent;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 
@@ -11,6 +12,27 @@ class AnimalFixtures extends Fixture
 {
     public function load(ObjectManager $manager)
     {
+        $continent1 = new Continent();
+        $continent1->setLibelle("Europe");
+        $manager->persist($continent1);
+
+        $continent2 = new Continent();
+        $continent2->setLibelle("Asie");
+        $manager->persist($continent2);
+
+        $continent3 = new Continent();
+        $continent3->setLibelle("Afrique");
+        $manager->persist($continent3);
+
+        $continent4 = new Continent();
+        $continent4->setLibelle("Amérique");
+        $manager->persist($continent4);
+
+        $continent5 = new Continent();
+        $continent5->setLibelle("Océanie");
+        $manager->persist($continent5);
+
+
         $c1 = new Famille();
         $c1->setLibelle("mammifères")
         ->setDescription("Animaux vertébrés nourissant leurs petits avec du lait");
@@ -34,7 +56,14 @@ class AnimalFixtures extends Fixture
         ->setImage("chien.png")
         ->setPoids(10)
         ->setDangereux(false)
-        ->setFamille($c1);
+        ->setFamille($c1)
+        //ici on utilise addContinent qui permet d'ajouter l'animal dans le continent
+        // et le continent dans l'animal
+        ->addContinent($continent1)
+        ->addContinent($continent2)
+        ->addContinent($continent3)
+        ->addContinent($continent4)
+        ->addContinent($continent5);
         $manager->persist($a1);
 
         $a2 = new Animal();
@@ -43,7 +72,12 @@ class AnimalFixtures extends Fixture
         ->setImage("cochon.png")
         ->setPoids(90)
         ->setDangereux(false)
-        ->setFamille($c1);
+        ->setFamille($c1)
+        ->addContinent($continent1)
+        ->addContinent($continent2)
+        ->addContinent($continent4)
+        ->addContinent($continent5);
+
         $manager->persist($a2);
 
         $a3 = new Animal();
@@ -52,7 +86,11 @@ class AnimalFixtures extends Fixture
         ->setImage("croco.png")
         ->setPoids(500)
         ->setDangereux(true)
-        ->setFamille($c2);
+        ->setFamille($c2)
+        ->addContinent($continent3)
+        ->addContinent($continent4)
+        ->addContinent($continent5);
+
         $manager->persist($a3);
 
         $a4 = new Animal();
@@ -61,7 +99,13 @@ class AnimalFixtures extends Fixture
         ->setImage("Serpent.png")
         ->setPoids(5)
         ->setDangereux(true)
-        ->setFamille($c2);
+        ->setFamille($c2)
+        ->addContinent($continent1)
+        ->addContinent($continent2)
+        ->addContinent($continent3)
+        ->addContinent($continent4)
+        ->addContinent($continent5);
+
         $manager->persist($a4);
 
         $a5 = new Animal();
@@ -70,7 +114,11 @@ class AnimalFixtures extends Fixture
         ->setImage("requin.png")
         ->setPoids(1000)
         ->setDangereux(true)
-        ->setFamille($c3);
+        ->setFamille($c3)
+        ->addContinent($continent3)
+        ->addContinent($continent4)
+        ->addContinent($continent5);
+
         $manager->persist($a5);
 
         // $product = new Product();
