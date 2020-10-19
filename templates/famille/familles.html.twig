@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Page des familles{% endblock %}
+{% block monTitre %}Familles{% endblock %}
+{% block body %}
+    {% for famille in familles %}
+    <!--capitalize permet d'avoir la première lettre en majuscule-->
+        <h2 class="border-bottom border-primary m-2"><a href="{{ path('afficher_famille',{'id': famille.id}) }}">{{famille.libelle|capitalize}}</a></h2>
+        <div class="m-2">{{famille.description}}</div>
+        <!--On peut récupérer la liste d'animaux car la classe Famille contient la liste
+         d'animaux via getAnimaux()-->
+         <div class="row">
+            {% for animal in famille.animaux %}
+                <div class="col-6">
+                    <div class="row m-2">
+                        <div class="col-12 col-md-6 col-lg-2 text-center">
+                            <img src="{{ asset('images/' ~ animal.image) }}" class="img-fluid" >
+                        </div>
+                        <div class="col">
+                            <!--On affiche la page animal en récupérant l'animal via l'id au niveau du controller-->
+                            <h2><a href="{{ path('afficher_animal',{'id': animal.id}) }}">{{animal.nom}}</a></h2>
+                            <div>{{animal.description}}</div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% endfor %}
+{% endblock %}
+
