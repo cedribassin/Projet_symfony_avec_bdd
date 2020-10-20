@@ -23,6 +23,12 @@
             <a href="{{ path('afficher_continent',{'id': continent.id}) }}" class="btn btn-warning m-2">{{continent.libelle}} </a>
         {% endfor %}
       </div>
+      <div>
+        {% for dispose in animal.disposes %}
+        <a href="{{ path('afficher_personne',{'id': dispose.peronne.id}) }}" class="btn btn-info">{{dispose.personne.nom}}</a>
+      {% endfor %}
+</div>
+
     </div>
 </div>
 
